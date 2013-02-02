@@ -1,0 +1,207 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:es="clr-namespace:Microsoft.Expression.Shapes;assembly=Microsoft.Expression.Drawing" xmlns:em="clr-namespace:Microsoft.Expression.Media;assembly=Microsoft.Expression.Drawing"
+	x:Class="SubsonicDesign.RadialSlider" mc:Ignorable="d">
+	<UserControl.Resources>
+		<ControlTemplate x:Key="PhoneDisabledTextBoxTemplate" TargetType="TextBox">
+			<ContentControl x:Name="ContentElement" BorderThickness="0" HorizontalContentAlignment="Stretch" Margin="{StaticResource PhoneTextBoxInnerMargin}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="Stretch"/>
+		</ControlTemplate>
+		<Style x:Key="SliderTextBoxStyle" TargetType="TextBox">
+			<Setter Property="FontFamily" Value="{StaticResource PhoneFontFamilyNormal}"/>
+			<Setter Property="FontSize" Value="{StaticResource PhoneFontSizeMediumLarge}"/>
+			<Setter Property="Background" Value="{StaticResource PhoneTextBoxBrush}"/>
+			<Setter Property="Foreground" Value="{StaticResource PhoneTextBoxForegroundBrush}"/>
+			<Setter Property="BorderBrush" Value="{StaticResource PhoneTextBoxBrush}"/>
+			<Setter Property="SelectionBackground" Value="{StaticResource PhoneAccentBrush}"/>
+			<Setter Property="SelectionForeground" Value="{StaticResource PhoneTextBoxSelectionForegroundBrush}"/>
+			<Setter Property="BorderThickness" Value="{StaticResource PhoneBorderThickness}"/>
+			<Setter Property="Padding" Value="2"/>
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="TextBox">
+						<Grid Background="Transparent">
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal"/>
+									<VisualState x:Name="MouseOver"/>
+									<VisualState x:Name="Disabled">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="EnabledBorder">
+												<DiscreteObjectKeyFrame KeyTime="0">
+													<DiscreteObjectKeyFrame.Value>
+														<Visibility>Collapsed</Visibility>
+													</DiscreteObjectKeyFrame.Value>
+												</DiscreteObjectKeyFrame>
+											</ObjectAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="DisabledOrReadonlyBorder">
+												<DiscreteObjectKeyFrame KeyTime="0">
+													<DiscreteObjectKeyFrame.Value>
+														<Visibility>Visible</Visibility>
+													</DiscreteObjectKeyFrame.Value>
+												</DiscreteObjectKeyFrame>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="ReadOnly">
+										<Storyboard>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="EnabledBorder">
+												<DiscreteObjectKeyFrame KeyTime="0">
+													<DiscreteObjectKeyFrame.Value>
+														<Visibility>Collapsed</Visibility>
+													</DiscreteObjectKeyFrame.Value>
+												</DiscreteObjectKeyFrame>
+											</ObjectAnimationUsingKeyFrames>
+											<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility" Storyboard.TargetName="DisabledOrReadonlyBorder">
+												<DiscreteObjectKeyFrame KeyTime="0">
+													<DiscreteObjectKeyFrame.Value>
+														<Visibility>Visible</Visibility>
+													</DiscreteObjectKeyFrame.Value>
+												</DiscreteObjectKeyFrame>
+											</ObjectAnimationUsingKeyFrames>
+										</Storyboard>
+									</VisualState>
+								</VisualStateGroup>
+								<VisualStateGroup x:Name="FocusStates">
+									<VisualState x:Name="Focused">
+										<Storyboard>
+											<DoubleAnimation Duration="0" To="0.8" Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ContentElement" d:IsOptimized="True"/>
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Unfocused"/>
+								</VisualStateGroup>
+								<VisualStateGroup x:Name="ValidationStates">
+									<VisualState x:Name="InvalidFocused"/>
+									<VisualState x:Name="Valid"/>
+									<VisualState x:Name="InvalidUnfocused"/>
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+							<Border x:Name="EnabledBorder" BorderThickness="{TemplateBinding BorderThickness}" Margin="{StaticResource PhoneTouchTargetOverhang}">
+								<ContentControl x:Name="ContentElement" BorderThickness="0" HorizontalContentAlignment="Stretch" Margin="{StaticResource PhoneTextBoxInnerMargin}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="Stretch"/>
+							</Border>
+							<Border x:Name="DisabledOrReadonlyBorder" BorderThickness="{TemplateBinding BorderThickness}" Margin="{StaticResource PhoneTouchTargetOverhang}" Visibility="Collapsed">
+								<TextBox x:Name="DisabledOrReadonlyContent" Foreground="{StaticResource PhoneDisabledBrush}" FontWeight="{TemplateBinding FontWeight}" FontStyle="{TemplateBinding FontStyle}" FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" IsReadOnly="True" SelectionBackground="{TemplateBinding SelectionBackground}" TextAlignment="{TemplateBinding TextAlignment}" TextWrapping="{TemplateBinding TextWrapping}" Text="{TemplateBinding Text}" Template="{StaticResource PhoneDisabledTextBoxTemplate}"/>
+							</Border>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</UserControl.Resources>
+
+	<Grid x:Name="LayoutRoot" Background="Transparent">
+		<Grid Margin="6">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="0.04*"/>
+				<ColumnDefinition Width="0.05*"/>
+				<ColumnDefinition Width="0.1*"/>
+				<ColumnDefinition Width="0.05*"/>
+				<ColumnDefinition Width="0.05*"/>
+				<ColumnDefinition Width="0.4*"/>
+				<ColumnDefinition Width="0.05*"/>
+				<ColumnDefinition Width="0.05*"/>
+				<ColumnDefinition Width="0.1*"/>
+				<ColumnDefinition Width="0.05*"/>
+				<ColumnDefinition Width="0.04*"/>
+			</Grid.ColumnDefinitions>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="0.04*"/>
+				<RowDefinition Height="0.05*"/>
+				<RowDefinition Height="0.1*"/>
+				<RowDefinition Height="0.05*"/>
+				<RowDefinition Height="0.05*"/>
+				<RowDefinition Height="0.4*"/>
+				<RowDefinition Height="0.05*"/>
+				<RowDefinition Height="0.05*"/>
+				<RowDefinition Height="0.1*"/>
+				<RowDefinition Height="0.05*"/>
+				<RowDefinition Height="0.04*"/>
+			</Grid.RowDefinitions>
+			<Ellipse x:Name="OuterEllipse_Copy" StrokeThickness="0" Grid.RowSpan="10" Grid.ColumnSpan="11" Margin="0,-2,0,-4" Grid.Row="1" Fill="#FF0A0A0A">
+				<Ellipse.Stroke>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF141414" Offset="0"/>
+						<GradientStop Color="#FF181818" Offset="1"/>
+						<GradientStop Color="#FF272727" Offset="0.457"/>
+					</LinearGradientBrush>
+				</Ellipse.Stroke>
+			</Ellipse>
+			<Ellipse x:Name="OuterEllipse" StrokeThickness="5" Grid.RowSpan="11" Grid.ColumnSpan="11">
+				<Ellipse.Stroke>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF141414" Offset="0"/>
+						<GradientStop Color="#FF181818" Offset="1"/>
+						<GradientStop Color="#FF272727" Offset="0.457"/>
+					</LinearGradientBrush>
+				</Ellipse.Stroke>
+				<Ellipse.Fill>
+					<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+						<GradientStop Color="#FF2D2D2D" Offset="0"/>
+						<GradientStop Color="#FF272727" Offset="1"/>
+						<GradientStop Color="#FF1A1A1A" Offset="0.293"/>
+					</LinearGradientBrush>
+				</Ellipse.Fill>
+			</Ellipse>
+			<Ellipse Margin="4.667,5.667,0.999,1.167" StrokeThickness="0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Grid.Row="2" Grid.Column="2" d:IsHidden="True" Grid.ColumnSpan="5" Grid.RowSpan="6">
+				<Ellipse.RenderTransform>
+					<CompositeTransform Rotation="-40"/>
+				</Ellipse.RenderTransform>
+				<Ellipse.Fill>
+					<LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+						<GradientStop Color="#00101010" Offset="1"/>
+						<GradientStop Color="#FF454545"/>
+					</LinearGradientBrush>
+				</Ellipse.Fill>
+				<Ellipse.Stroke>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF141414" Offset="0"/>
+						<GradientStop Color="#FF181818" Offset="1"/>
+						<GradientStop Color="#FF272727" Offset="0.457"/>
+					</LinearGradientBrush>
+				</Ellipse.Stroke>
+			</Ellipse>
+			<Ellipse x:Name="Border_Shadow_Inner" Margin="0" StrokeThickness="0" RenderTransformOrigin="0.5,0.5" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="7" Grid.RowSpan="7">
+				<Ellipse.Fill>
+					<RadialGradientBrush>
+						<GradientStop Color="#BB000000" Offset="1"/>
+						<GradientStop Color="#00434343"/>
+					</RadialGradientBrush>
+				</Ellipse.Fill>
+				<Ellipse.Stroke>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF141414" Offset="0"/>
+						<GradientStop Color="#FF181818" Offset="1"/>
+						<GradientStop Color="#FF272727" Offset="0.457"/>
+					</LinearGradientBrush>
+				</Ellipse.Stroke>
+			</Ellipse>
+			<es:Arc x:Name="Black_Track" ArcThickness="0.413" ArcThicknessUnit="Percent" EndAngle="360" Margin="0" Stretch="None" Stroke="Black" StrokeThickness="0" StartAngle="0" UseLayoutRounding="False" Fill="Black" Opacity="0.15" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="7" Grid.RowSpan="7"/>
+			<es:Arc x:Name="TrackBar" ArcThickness="0.37" ArcThicknessUnit="Percent" EndAngle="205" Margin="0" Stretch="None" Stroke="Black" StartAngle="0" UseLayoutRounding="False" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="7" Grid.RowSpan="7" StrokeThickness="0">
+				<es:Arc.Fill>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FFC0FF69" Offset="0"/>
+						<GradientStop Color="#FF72C203" Offset="1"/>
+					</LinearGradientBrush>
+				</es:Arc.Fill>
+			</es:Arc>
+			<es:Arc x:Name="Outer_Border_Dark" ArcThickness="0.112" ArcThicknessUnit="Percent" EndAngle="360" Margin="0" Stretch="None" Stroke="Black" StrokeThickness="0" StartAngle="0" UseLayoutRounding="False" Grid.RowSpan="9" Grid.ColumnSpan="9" Grid.Row="1" Grid.Column="1">
+				<es:Arc.Fill>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF0A0A0A" Offset="0"/>
+						<GradientStop Color="#FF292929" Offset="1"/>
+					</LinearGradientBrush>
+				</es:Arc.Fill>
+			</es:Arc>
+			<es:Arc x:Name="Inner_Border" ArcThickness="0.09" ArcThicknessUnit="Percent" EndAngle="360" Margin="0" Stretch="None" Stroke="Black" StrokeThickness="0" StartAngle="0" UseLayoutRounding="False" Fill="#FF585858" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="3"/>
+			<Ellipse Margin="0" StrokeThickness="0" Fill="#FF0C0C0C" Opacity="0.77" Grid.Row="4" Grid.Column="4" Grid.ColumnSpan="3" Grid.RowSpan="3">
+				<Ellipse.Stroke>
+					<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+						<GradientStop Color="#FF141414" Offset="0"/>
+						<GradientStop Color="#FF181818" Offset="1"/>
+						<GradientStop Color="#FF272727" Offset="0.457"/>
+					</LinearGradientBrush>
+				</Ellipse.Stroke>
+			</Ellipse>
+			<Viewbox Grid.Column="5" Margin="0" Grid.Row="5">
+				<TextBox x:Name="SliderValueTextBox" Margin="0" Text="200" TextAlignment="Center" FontSize="60" TextWrapping="Wrap" Foreground="#FFC7FF69" HorizontalAlignment="Center" Height="Auto" Style="{StaticResource SliderTextBoxStyle}" TextChanged="SliderValueTextBox_TextChanged" KeyDown="SliderValueTextBox_KeyDown" />
+			</Viewbox>
+		</Grid>
+	</Grid>
+</UserControl>
