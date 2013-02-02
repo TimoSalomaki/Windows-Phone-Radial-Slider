@@ -1,4 +1,18 @@
-﻿using System;
+﻿/* Radial Slider control for Windows Phone Developers.
+ * 
+ * Design and development:
+ *  Timo Salomäki (Subsonic Design)
+ *  http://subsonicdesign.net
+ *  
+ * Feel free to contact me with feedback, suggestions or fixes.
+ * I'm available for freelance work.
+ * 
+ * timo@subsonicdesign.net
+ * 
+ * Licensed under GNU General Public License, version 2
+ */
+
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -135,8 +149,6 @@ namespace SubsonicDesign
 		/// <param name="isDegrees">If true, degrees will be converted to a slider value. If false, the value
 		/// will be set as the slider value.</param>
 		private void SetSliderValue(double newValue, bool isDegrees) {
-			if (newValue >= minimumValue && newValue <= maximumValue)
-			{
 				double oldValue = currentValue;
 
 				if (isDegrees)
@@ -147,10 +159,20 @@ namespace SubsonicDesign
 					currentValue = (int)(minimumValue + (maximumValue - minimumValue) * newValue / 360);
 				}
 
-				else
+				else if (newValue >= minimumValue && newValue <= maximumValue)
 				{
 					currentValue = Convert.ToInt32(newValue);
 					TrackBar.EndAngle = newValue / (maximumValue - minimumValue) * 360;
+				}
+
+				else
+				{
+					if (overflowValueToMinimum)
+						SetSliderValue(minimumValue, false);
+					else
+						SetSliderValue(maximumValue, false);
+
+					return;
 				}
 
 				// Optionally show the calculated slider value on the control
@@ -163,15 +185,6 @@ namespace SubsonicDesign
 					//... raise a SliderValueChanged event with the corresponding data
 					SliderValueChangedEventArgs newData = new SliderValueChangedEventArgs(oldValue, newValue);
 					SliderValueChanged(this, newData);
-				}
-			}
-
-			else
-			{
-				if (overflowValueToMinimum)
-					SetSliderValue(minimumValue, false);
-				else
-					SetSliderValue(maximumValue, false);
 			}
 		}
 

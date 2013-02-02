@@ -28,11 +28,11 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<my:RadialSlider CurrentValue="99" Margin="8,75,10,94" MaximumValue="255" Name="greenSlider" ShowSliderValue="True" Text="" TextBrush="#FF8CFF69" Height="438" Width="438">
+			<my:RadialSlider CurrentValue="200" Margin="0,75,18,94" MaximumValue="255" Name="greenSlider" ShowSliderValue="False" Text="♥" TextBrush="#FF2BFFEF" Height="438" Width="438">
 				<my:RadialSlider.TrackBarBrush>
 					<LinearGradientBrush>
-						<GradientStop Color="#FF8CFF69" Offset="0" />
-						<GradientStop Color="#FF5F893E" Offset="1" />
+						<GradientStop Color="#FF4EFFE4" Offset="0" />
+						<GradientStop Color="#FF3E89A0" Offset="1" />
 					</LinearGradientBrush>
 				</my:RadialSlider.TrackBarBrush>
 			</my:RadialSlider>
