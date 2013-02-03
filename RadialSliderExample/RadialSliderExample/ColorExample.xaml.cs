@@ -1,4 +1,17 @@
-﻿using System;
+﻿/* Radial Slider control for Windows Phone Developers.
+ * 
+ * Design and development:
+ *  Timo Salomäki (Subsonic Design)
+ *  http://subsonicdesign.net
+ *  timo@subsonicdesign.net 
+ *  
+ * Feel free to contact me with feedback, suggestions or fixes.
+ * I'm available for freelance work.
+ * 
+ * Licensed under GNU General Public License, version 2
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -26,7 +39,7 @@ namespace RadialSliderExample
 
 		private void ColorSlider_SliderValueChanged(object sender, SubsonicDesign.SliderValueChangedEventArgs e)
 		{
-			UpdateColor();
+			//UpdateColor();
 		}
 
 		private void UpdateColor()

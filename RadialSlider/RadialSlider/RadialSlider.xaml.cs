@@ -3,11 +3,10 @@
  * Design and development:
  *  Timo Salomäki (Subsonic Design)
  *  http://subsonicdesign.net
+ *  timo@subsonicdesign.net 
  *  
  * Feel free to contact me with feedback, suggestions or fixes.
  * I'm available for freelance work.
- * 
- * timo@subsonicdesign.net
  * 
  * Licensed under GNU General Public License, version 2
  */
@@ -22,6 +21,8 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.ComponentModel;
+using System.Threading;
+using System.Linq;
 
 namespace SubsonicDesign
 {
@@ -115,27 +116,30 @@ namespace SubsonicDesign
 		private int maximumValue;
 		private int currentValue;
 		private bool overflowValueToMinimum;
+
+		private double controlWidth;
+		private double controlHeight;
 		
 		public RadialSlider()
 		{
 			InitializeComponent();
+
+			controlWidth = this.RenderSize.Width;
+			controlHeight = this.RenderSize.Height;
 
 			SetInputScope();
 
 			zeroAnglePoint = new Point(this.Width / 2, 0);
 			centerPoint = new Point(this.Width / 2, this.Height / 2);
 			
-			this.MouseMove +=new System.Windows.Input.MouseEventHandler(Knob_MouseMove);
-		}
-
-		private void Knob_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
-		{
-			CalculateDraggingPosition(e.GetPosition(this));
+			//this.MouseMove +=new System.Windows.Input.MouseEventHandler(Knob_MouseMove);
 		}
 		
-		private void CalculateDraggingPosition(Point currentPosition) 
+		private void CalculateDraggingPosition(object currentPosition) 
 		{
-			double rotation = Math.Atan2(currentPosition.X - this.RenderSize.Width/2, currentPosition.Y - this.RenderSize.Height/2);
+			Point position = (Point)currentPosition;
+
+			double rotation = Math.Atan2(position.X - controlWidth / 2, position.Y - controlHeight / 2);
 				
 			rotation = 180 - RadianToDegree(rotation);
 			rotation = Normalise(rotation);
@@ -153,16 +157,26 @@ namespace SubsonicDesign
 
 				if (isDegrees)
 				{
-					TrackBar.EndAngle = newValue; // Visually update the slider
-
 					// Calculate the slider value according to minimum and maximum values
 					currentValue = (int)(minimumValue + (maximumValue - minimumValue) * newValue / 360);
+
+					// Update the UI thread
+					Dispatcher.BeginInvoke(() => {
+						TrackBar.EndAngle = newValue; // Visually update the slider
+					});
 				}
 
 				else if (newValue >= minimumValue && newValue <= maximumValue)
 				{
 					currentValue = Convert.ToInt32(newValue);
-					TrackBar.EndAngle = newValue / (maximumValue - minimumValue) * 360;
+
+					double calculatedAngle = newValue / (maximumValue - minimumValue) * 360;
+
+					// Update the UI thread
+					Dispatcher.BeginInvoke(() =>
+					{
+						TrackBar.EndAngle = calculatedAngle;
+					});
 				}
 
 				else
@@ -177,7 +191,10 @@ namespace SubsonicDesign
 
 				// Optionally show the calculated slider value on the control
 				if (ShowSliderValue)
-					SliderValueTextBox.Text = currentValue.ToString();
+					// Update the UI thread
+					Dispatcher.BeginInvoke(() => {
+						SliderValueTextBox.Text = currentValue.ToString();
+					});
 
 				// If the SliderValueChanged event is already initialized...
 				if (SliderValueChanged != null)
@@ -212,10 +229,38 @@ namespace SubsonicDesign
 		#endregion
 
 		#region Events
+
+		//private void Knob_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+		//{
+		//    Thread calcThread = new Thread(new ParameterizedThreadStart(CalculateDraggingPosition));
+		//    calcThread.Start(e.GetPosition(this));
+		//}
+
+		void Touch_FrameReported(object sender, TouchFrameEventArgs e)
+		{
+			TouchPoint touchPoint = e.GetTouchPoints(this)[0];
+
+			/* 
+			 * Make sure that the touch point is inside the control, otherwise touch events from any
+			 * point inside the app are processed. If we don't add this check and there are multiple
+			 * radial sliders on the form, they will all react to all touch events on the parent page.
+			 */
+
+			if (Enumerable.Range(0, (int)controlWidth).Contains((int)touchPoint.Position.X) &&
+				Enumerable.Range(0, (int)controlHeight).Contains((int)touchPoint.Position.Y))
+			{
+				Thread calcThread = new Thread(new ParameterizedThreadStart(CalculateDraggingPosition));
+				calcThread.Start(touchPoint.Position);
+			}
+		}
+
 		private void Knob_SizeChanged(object sender, System.Windows.SizeChangedEventArgs e)
 		{
 			zeroAnglePoint = new Point(this.Width / 2, 0);
 			centerPoint = new Point(this.Width / 2, this.Height / 2);
+
+			controlWidth = this.RenderSize.Width;
+			controlHeight = this.RenderSize.Height;
 		}
 
 		private void SliderValueTextBox_TextChanged(object sender, TextChangedEventArgs e)
@@ -240,6 +285,11 @@ namespace SubsonicDesign
 		public delegate void OnSliderValueChanged(object sender, SliderValueChangedEventArgs e);
 		public event OnSliderValueChanged SliderValueChanged;
 		#endregion
+
+		private void UserControl_Loaded(object sender, RoutedEventArgs e)
+		{
+			System.Windows.Input.Touch.FrameReported += new TouchFrameEventHandler(Touch_FrameReported);
+		}
 	}
 
 
