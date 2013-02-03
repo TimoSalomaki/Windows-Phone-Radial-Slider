@@ -2,7 +2,9 @@
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
   <App BitsPerPixel="32" xmlns="" ProductID="{d8f0b57b-0aaf-4c06-83d4-8133f2b5afa9}" Title="RadialSliderExample" RuntimeType="Silverlight" Version="0.1.1.0" Genre="apps.normal"  Author="Timo Salomäki" Description="Radial slider control for Windows Phone Developers" Publisher="Timo Salomäki">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
-    <Capabilities />
+		<Capabilities>
+			<Capability Name="ID_CAP_MEDIALIB"/>
+		</Capabilities>
     <Tasks>
       <DefaultTask  Name ="_default" NavigationPage="ColorExample.xaml"/>
     </Tasks>
