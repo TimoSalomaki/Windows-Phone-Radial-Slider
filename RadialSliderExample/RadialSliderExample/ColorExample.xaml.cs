@@ -39,7 +39,7 @@ namespace RadialSliderExample
 
 		private void ColorSlider_SliderValueChanged(object sender, SubsonicDesign.SliderValueChangedEventArgs e)
 		{
-			//UpdateColor();
+			UpdateColor();
 		}
 
 		private void UpdateColor()

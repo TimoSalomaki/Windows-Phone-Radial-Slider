@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="RadialSliderExample.BigSlider"
+    x:Class="RadialSliderExample.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -11,8 +11,8 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True" xmlns:my="clr-namespace:SubsonicDesign;assembly=SubsonicDesign.RadialSlider" xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
-
+    shell:SystemTray.IsVisible="True" Loaded="PhoneApplicationPage_Loaded">
+	
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
@@ -22,16 +22,24 @@
 
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="SUBSONIC DESIGN" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="big slider" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock x:Name="ApplicationTitle" Text="SUBSONIC DESIGN RADIAL SLIDER" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="examples" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
         </StackPanel>
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<my:RadialSlider Margin="9,52,9,117" MaximumValue="100" Name="bigSlider" ShowSliderValue="True" Height="438" Width="438" MinimumValue="0" CurrentValue="40" />
-			<toolkit:ToggleSwitch Content="True" FontSize="16" Header="IsEnabled" IsChecked="True" Margin="9,505,9,6" Name="isEnabledToggle" VerticalAlignment="Center" VerticalContentAlignment="Top" Height="96" Checked="isEnabledToggle_Checked" Unchecked="isEnabledToggle_Unchecked" />
+			<ListBox x:Name="MainListBox" SelectionChanged="MainListBox_SelectionChanged">
+				<ListBox.ItemTemplate>
+					<DataTemplate x:Name="MainListBoxItemTemplate">
+						<StackPanel Orientation="Vertical" Margin="12">
+							<TextBlock FontSize="36" Text="{Binding Text}" />
+							<TextBlock FontSize="20" Text="{Binding Description}" />
+						</StackPanel>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
 		</Grid>
-	</Grid>
+    </Grid>
  
     <!--Sample code showing usage of ApplicationBar-->
     <!--<phone:PhoneApplicationPage.ApplicationBar>

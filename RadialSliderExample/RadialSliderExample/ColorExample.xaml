@@ -20,38 +20,34 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock x:Name="ApplicationTitle" Text="SUBSONIC DESIGN" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock x:Name="PageTitle" Text="radial slider" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
-
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<my:RadialSlider Height="200" Margin="12,1,244,406" MaximumValue="255" ShowSliderValue="True" Text="" TextBrush="#FFFF6969" Width="200" Name="redSlider" SliderValueChanged="ColorSlider_SliderValueChanged" CurrentValue="111">
-				<my:RadialSlider.TrackBarBrush>
-					<LinearGradientBrush>
-						<GradientStop Color="#FFFF6969" Offset="0" />
-						<GradientStop Color="#FFD16161" Offset="1" />
-					</LinearGradientBrush>
-				</my:RadialSlider.TrackBarBrush>
-			</my:RadialSlider>
-			<my:RadialSlider Height="200" Margin="12,198,244,209" MaximumValue="255" ShowSliderValue="True" Text="" TextBrush="#FF8CFF69" Width="200" Name="greenSlider" SliderValueChanged="ColorSlider_SliderValueChanged" CurrentValue="99">
-				<my:RadialSlider.TrackBarBrush>
-					<LinearGradientBrush>
-						<GradientStop Color="#FF8CFF69" Offset="0" />
-						<GradientStop Color="#FF5F893E" Offset="1" />
-					</LinearGradientBrush>
-				</my:RadialSlider.TrackBarBrush>
-			</my:RadialSlider>
-			<my:RadialSlider Height="200" Margin="12,396,244,11" MaximumValue="255" ShowSliderValue="True" Text="" TextBrush="#FF69D1FF" Width="200" Name="blueSlider" SliderValueChanged="ColorSlider_SliderValueChanged" CurrentValue="66">
-				<my:RadialSlider.TrackBarBrush>
-					<LinearGradientBrush>
-						<GradientStop Color="#FF90C5FF" Offset="0" />
-						<GradientStop Color="#FF1777CB" Offset="1" />
-					</LinearGradientBrush>
-				</my:RadialSlider.TrackBarBrush>
-			</my:RadialSlider>
+			<StackPanel Name="stackPanel1">
+				<my:RadialSlider Height="200" MaximumValue="255" ShowSliderValue="True" Text="" TextBrush="#FFFF6969" Width="200" Name="redSlider" SliderValueChanged="ColorSlider_SliderValueChanged" CurrentValue="111" Margin="28">
+					<my:RadialSlider.SliderBrush>
+						<LinearGradientBrush>
+							<GradientStop Color="#FFFF6969" Offset="0" />
+							<GradientStop Color="#FFD16161" Offset="1" />
+						</LinearGradientBrush>
+					</my:RadialSlider.SliderBrush>
+				</my:RadialSlider>
+				<my:RadialSlider Height="200" MaximumValue="255" ShowSliderValue="True" Text="" TextBrush="#FF8CFF69" Width="200" Name="greenSlider" SliderValueChanged="ColorSlider_SliderValueChanged" CurrentValue="99" Margin="28">
+					<my:RadialSlider.SliderBrush>
+						<LinearGradientBrush>
+							<GradientStop Color="#FF8CFF69" Offset="0" />
+							<GradientStop Color="#FF5F893E" Offset="1" />
+						</LinearGradientBrush>
+					</my:RadialSlider.SliderBrush>
+				</my:RadialSlider>
+				<my:RadialSlider Height="200" MaximumValue="255" ShowSliderValue="True" Text="" TextBrush="#FF69D1FF" Width="200" Name="blueSlider" SliderValueChanged="ColorSlider_SliderValueChanged" CurrentValue="66" Margin="28">
+					<my:RadialSlider.SliderBrush>
+						<LinearGradientBrush>
+							<GradientStop Color="#FF90C5FF" Offset="0" />
+							<GradientStop Color="#FF1777CB" Offset="1" />
+						</LinearGradientBrush>
+					</my:RadialSlider.SliderBrush>
+				</my:RadialSlider>
+			</StackPanel>
 		</Grid>
     </Grid>
  

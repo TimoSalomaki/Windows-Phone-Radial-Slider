@@ -13,23 +13,11 @@ using Microsoft.Phone.Controls;
 
 namespace RadialSliderExample
 {
-	public partial class BigSlider : PhoneApplicationPage
+	public partial class StartPage : PhoneApplicationPage
 	{
-		public BigSlider()
+		public StartPage()
 		{
 			InitializeComponent();
-		}
-
-		private void isEnabledToggle_Checked(object sender, RoutedEventArgs e)
-		{
-			isEnabledToggle.Content = "True";
-			bigSlider.IsEnabled = true;
-		}
-
-		private void isEnabledToggle_Unchecked(object sender, RoutedEventArgs e)
-		{
-			isEnabledToggle.Content = "False";
-			bigSlider.IsEnabled = false;
 		}
 	}
 }
