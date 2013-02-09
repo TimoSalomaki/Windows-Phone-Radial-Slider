@@ -229,7 +229,7 @@
 				</Ellipse.Stroke>
 			</Ellipse>
 			<Viewbox x:Name="SliderValue_ViewBox" Grid.Column="6" Margin="0" Grid.Row="6">
-				<TextBox x:Name="SliderValueTextBox" Margin="0" Text="" TextAlignment="Center" FontSize="60" TextWrapping="Wrap" Foreground="{Binding Source={StaticResource PhoneAccentBrush}}" HorizontalAlignment="Center" Height="Auto" Style="{StaticResource SliderTextBoxStyle}" TextChanged="SliderValueTextBox_TextChanged" KeyDown="SliderValueTextBox_KeyDown" />
+				<TextBox x:Name="SliderValueTextBox" Margin="0" Text="" TextAlignment="Center" FontSize="60" TextWrapping="Wrap" Foreground="{Binding Source={StaticResource PhoneAccentBrush}}" HorizontalAlignment="Center" Height="Auto" Style="{StaticResource SliderTextBoxStyle}" TextChanged="SliderValueTextBox_TextChanged" KeyDown="SliderValueTextBox_KeyDown" GotFocus="SliderValueTextBox_GotFocus" />
 			</Viewbox>
 		</Grid>
 	</Grid>

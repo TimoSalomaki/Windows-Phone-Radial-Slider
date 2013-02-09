@@ -347,8 +347,8 @@ namespace SubsonicDesign
 
 		#region Private fields
 		private string sliderTextBoxText = "";
-		private int minimumValue;
-		private int maximumValue;
+		private int minimumValue = 0;
+		private int maximumValue = 100;
 		private int currentValue;
 		private double controlWidth;
 		private double controlHeight;
@@ -608,6 +608,12 @@ namespace SubsonicDesign
 		private void UserControl_LostFocus(object sender, System.Windows.RoutedEventArgs e)
 		{
 			VisualStateManager.GoToState(this, "Unfocused", true);
+		}
+
+		private void SliderValueTextBox_GotFocus(object sender, RoutedEventArgs e)
+		{
+			// The user will be able to input new valuse faster if the content is already selected
+			SliderValueTextBox.SelectAll();
 		}
 
 		#region Custom events
