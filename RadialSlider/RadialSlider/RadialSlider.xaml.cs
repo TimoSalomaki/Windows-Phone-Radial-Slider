@@ -465,31 +465,78 @@ namespace SubsonicDesign
 			};
 		}
 
+		private bool IsPointInsideEllipseShape(Ellipse ellipseToUse, Point point)
+		{
+			EllipseGeometry ellipse  = new EllipseGeometry();
+			ellipse.RadiusX = ellipseToUse.RenderSize.Width / 2;
+			ellipse.RadiusY = ellipseToUse.RenderSize.Height / 2;
+
+			// Get absolute position of the ellipse inside parent control
+			//Point absolutePosition = ellipse.Transform.Transform(new Point(0, 0));
+			var transform = ellipseToUse.TransformToVisual(this);
+			Point absolutePosition = transform.Transform(new Point(0, 0));
+
+			ellipse.Center = new Point(absolutePosition.X + ellipse.RadiusX,
+										absolutePosition.Y + ellipse.RadiusY);
+
+			if (ellipse.Bounds.Contains(point))
+			{
+				double xPositionInsideBounds = point.X - absolutePosition.X;
+				double yPositionInsideBounds = point.Y - absolutePosition.Y;
+
+				if (PointInsideEllipse(xPositionInsideBounds, ellipse.RadiusX, yPositionInsideBounds, ellipse.RadiusY))
+				{
+					return true;
+				}
+			}
+
+			return false;
+		}
+
+		private bool PointInsideEllipse(double x, double a, double y, double b)
+		{
+			double xDistance = x - a;
+			xDistance = xDistance < 0 ? xDistance * -1 : xDistance;
+
+			double yDistance = y - b;
+			yDistance = yDistance < 0 ? yDistance * -1 : yDistance;
+
+
+			double ellipseCalculation = (Math.Pow(xDistance, 2) / Math.Pow(a, 2)) +
+										(Math.Pow(yDistance, 2) / Math.Pow(b, 2));
+
+			if (ellipseCalculation < 1)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 		#endregion
 
 		#region Events
 
 		void Touch_FrameReported(object sender, TouchFrameEventArgs e)
 		{
-			// Slider value can only be modified when the control itself is enabled
-			if (this.IsEnabled)
-			{				
-				TouchPoint touchPoint = e.GetTouchPoints(this)[0];
+			TouchPoint touchPoint = e.GetTouchPoints(this)[0];
 
-				if (touchPoint.Action == TouchAction.Move)
+			// Slider value can only be modified when the control itself is enabled and the touch point
+			// is inside the control (which is elliptic). Also check if the touch position is not in the middle
+			// of the control where the textbox is.
+			if (this.IsEnabled && PointInsideEllipse(touchPoint.Position.X, controlWidth / 2, touchPoint.Position.Y, controlHeight / 2)
+				&& !IsPointInsideEllipseShape(InnerEllipse_Dark, touchPoint.Position))
+			{
+				/* 
+				* Make sure that the touch point is inside the control, otherwise touch events from any
+				* point inside the app are processed. If we don't add this check and there are multiple
+				* radial sliders on the form, they will all react to all touch events on the parent page.
+				*/
+				if (Enumerable.Range(0, (int)controlWidth).Contains((int)touchPoint.Position.X) &&
+					Enumerable.Range(0, (int)controlHeight).Contains((int)touchPoint.Position.Y))
 				{
-					/* 
-					 * Make sure that the touch point is inside the control, otherwise touch events from any
-					 * point inside the app are processed. If we don't add this check and there are multiple
-					 * radial sliders on the form, they will all react to all touch events on the parent page.
-					 */
-
-					if (Enumerable.Range(0, (int)controlWidth).Contains((int)touchPoint.Position.X) &&
-						Enumerable.Range(0, (int)controlHeight).Contains((int)touchPoint.Position.Y))
-					{
-						Thread calcThread = new Thread(new ParameterizedThreadStart(CalculateDraggingPosition));
-						calcThread.Start(touchPoint.Position);
-					}
+					Thread calcThread = new Thread(new ParameterizedThreadStart(CalculateDraggingPosition));
+					calcThread.Start(touchPoint.Position);
 				}
 			}
 		}

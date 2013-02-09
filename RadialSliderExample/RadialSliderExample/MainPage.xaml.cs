@@ -31,7 +31,9 @@ namespace RadialSliderExample
 				new MainListBoxItem { Text = "Performance test", 
 					Description = "See how the app performas with dozens of sliders on the same page" },
 				new MainListBoxItem { Text = "Visual States", 
-					Description = "Control behaviours and graphics on various different states" }
+					Description = "Control behaviours and graphics on various different states" },
+				new MainListBoxItem { Text = "Elliptic Shapes", 
+					Description = "Non-circlular shapes and how they work for RadialSlider" }
 			};
 
 			MainListBox.ItemsSource = mainListBoxItems;
@@ -58,6 +60,10 @@ namespace RadialSliderExample
 
 					case 3:
 						NavigationService.Navigate(new Uri("/VisualStates.xaml", UriKind.Relative));
+						break;
+
+					case 4:
+						NavigationService.Navigate(new Uri("/EllipticShapes.xaml", UriKind.Relative));
 						break;
 				}
 			}

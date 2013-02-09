@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage 
-    x:Class="RadialSliderExample.PerformancePage"
+    x:Class="RadialSliderExample.WeirdShapes"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -11,9 +11,8 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
-    shell:SystemTray.IsVisible="True" 
-	xmlns:my="clr-namespace:SubsonicDesign;assembly=SubsonicDesign.RadialSlider"
-	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
+    shell:SystemTray.IsVisible="True"
+	xmlns:my="clr-namespace:SubsonicDesign;assembly=SubsonicDesign.RadialSlider">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
@@ -22,11 +21,25 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock x:Name="ApplicationTitle" Text="SUBSONIC DESIGN" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBlock x:Name="PageTitle" Text="elliptic shapes" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+        </StackPanel>
+
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-			<toolkit:WrapPanel Name="wrapPanel">
-				
-			</toolkit:WrapPanel>
+			<my:RadialSlider Margin="12,6,252,213" MaximumValue="100" Name="bigSlider" ShowSliderValue="True" MinimumValue="0" CurrentValue="0" />
+			<my:RadialSlider CurrentValue="75" Margin="9,400,6,6" MaximumValue="100" MinimumValue="0" Name="radialSlider1" ShowSliderValue="True" TextBrush="#FFCD6683">
+				<my:RadialSlider.SliderBrush>
+					<LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+						<GradientStop Color="#FF7C3E3B" Offset="0" />
+						<GradientStop Color="#FFE8729B" Offset="1" />
+					</LinearGradientBrush>
+				</my:RadialSlider.SliderBrush>
+			</my:RadialSlider>
+			<my:RadialSlider CurrentValue="25" Margin="222,6,108,213" MaximumValue="100" MinimumValue="0" Name="radialSlider2" ShowSliderValue="True" TextBrush="#FF97B77B" SliderBrush="#FF97B77B" />
+			<my:RadialSlider CurrentValue="50" Margin="370,6,6,213" MaximumValue="100" MinimumValue="0" Name="radialSlider3" ShowSliderValue="True" SliderBrush="#FFC17F23" TextBrush="#FFC17F23"></my:RadialSlider>
 		</Grid>
     </Grid>
  

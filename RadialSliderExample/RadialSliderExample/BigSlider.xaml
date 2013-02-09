@@ -12,8 +12,13 @@
     SupportedOrientations="Portrait" Orientation="Portrait"
     mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
     shell:SystemTray.IsVisible="True" 
+<<<<<<< HEAD
     xmlns:my="clr-namespace:SubsonicDesign;assembly=SubsonicDesign.RadialSlider" 
     xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
+=======
+	xmlns:my="clr-namespace:SubsonicDesign;assembly=SubsonicDesign.RadialSlider" 
+	xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit">
+>>>>>>> Accurate sliding and bug fixes
 
     <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
