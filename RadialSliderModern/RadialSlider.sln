@@ -1,0 +1,19 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RadialSlider", "RadialSlider\RadialSlider.csproj", "{8db3c335-7488-4a13-b98d-aa4b4f93eb00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8DB3C335-7488-4A13-B98D-AA4B4F93EB00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DB3C335-7488-4A13-B98D-AA4B4F93EB00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DB3C335-7488-4A13-B98D-AA4B4F93EB00}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8DB3C335-7488-4A13-B98D-AA4B4F93EB00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DB3C335-7488-4A13-B98D-AA4B4F93EB00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DB3C335-7488-4A13-B98D-AA4B4F93EB00}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
