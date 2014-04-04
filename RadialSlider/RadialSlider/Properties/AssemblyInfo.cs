@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Radial Slider")]
-[assembly: AssemblyDescription("Radial slider control for Windows Phone developers")]
+[assembly: AssemblyTitle("Windows Phone Radial Slider")]
+[assembly: AssemblyDescription("Radial slider control for Windows Phone")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Subsonic Design")]
-[assembly: AssemblyProduct("Radial Slider")]
-[assembly: AssemblyCopyright("Copyright © Timo Salomäki 2013")]
+[assembly: AssemblyCompany("Hanki Design")]
+[assembly: AssemblyProduct("Windows Phone Radial Slider")]
+[assembly: AssemblyCopyright("Copyright © Timo Salomäki 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,5 +33,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("0.2.1")]
-[assembly: AssemblyFileVersion("0.2.1")]
+[assembly: AssemblyVersion("0.3.1")]
+[assembly: AssemblyFileVersion("0.3.1")]
