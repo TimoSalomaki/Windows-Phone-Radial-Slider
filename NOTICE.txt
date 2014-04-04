@@ -1,0 +1,10 @@
+=======================================================
+==  NOTICE file corresponding to the section 4 d of  ==
+==  the Apache License, Version 2.0                  ==
+=======================================================
+
+WP Radial Slider
+Copyright 2012-2012 Timo Salomäki
+
+This product includes software developed by
+Timo Salomäki (http://hanki.io).
